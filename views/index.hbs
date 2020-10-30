@@ -1,2 +1,33 @@
-<h3>i am index with access to images</h3>
-<img src="/flags/jp.png" alt="">
+    <div class="container">
+    
+    <h1>News Search</h1>
+
+        <form action="/index" method="POST">
+            <input type="text" name="search" id="search" placeholder="Placeholder" class="form-control"><br>
+
+                <input type="radio" id="us" name="country" value="country">
+                <label for="us"><img src="/flags/us.png" alt=""></label>
+                <input type="radio" id="uk" name="country" value="country">
+                <label for="uk"><img src="/flags/uk.png" alt=""></label>
+                <input type="radio" id="fr" name="country" value="country">
+                <label for="fr"><img src="/flags/fr.png" alt=""></label>
+                <input type="radio" id="sg" name="country" value="country">
+                <label for="sg"><img src="/flags/sg.png" alt=""></label>
+                <input type="radio" id="jp" name="country" value="country">
+                <label for="jp"><img src="/flags/jp.png" alt=""></label>
+                <input type="radio" id="cn" name="country" value="country">
+                <label for="cn"><img src="/flags/cn.png" alt=""></label>
+
+            <div>
+                <select id="category" name="category"  class="form-control">
+                    <option value="business">Business</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="health">Health</option>
+                    <option value="science">Science</option>
+                    <option value="technology">Technology</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3 form-control">search</button>
+        </div>
+
+    </form>

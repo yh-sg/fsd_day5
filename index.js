@@ -6,6 +6,7 @@ const withQuery = require('with-query').default
 
 //configure to env
 const PORT = parseInt(process.argv[2]) || parseInt(process.env.PORT) || 3000;
+const API_KEY = process.env.API_KEY
 
 //express instance and handlebars
 const app = express(); 
@@ -19,6 +20,12 @@ app.get('/',(req,res)=>{
     res.render('index')
 })
 
+app.post('/index',
+    express.urlencoded({extended: true}), 
+    (req,res,next)=>{
+        console.log(req.body)
+})
+
 //access to statics file
 app.use(express.static(__dirname + '/static'))
 
@@ -27,3 +34,10 @@ app.use(express.static(__dirname + '/static'))
 app.listen(PORT,()=>{
     console.log('app is running on port',PORT);
 })
+
+// if(API_KEY)
+//     app.listen(PORT, ()=>{
+//         console.log(`App is running on ${PORT} at ${new Date()} key ${API_KEY}`);
+//     })
+// else
+//     console.error('API_KEY is not set')
