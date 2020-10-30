@@ -1,7 +1,17 @@
 <div class="container">
-    <h1>Title</h1>
-    <p>some images</p>
-    <p>summary</p>
-    <p>date</p>
-    <p>linke to url</p>
+    
+    {{#if hasContent}}
+        {{#each article}}
+            <h1>{{this.title}}</h1>
+            <img src={{this.image}} alt="" height="800px" width="800px" class="img-fluid" alt="Responsive image">
+            <p>{{this.summary}}</p>
+            <div class="d-flex flex-row justify-content-between">
+                <p>{{this.date}}</p>
+                <a href={{this.url}}>Read</a>
+            </div>
+        {{/each}}
+    {{else}}
+        <h4>Please try again, this has no result</h4>
+    {{/if}}
+
 </div>

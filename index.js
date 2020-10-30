@@ -21,11 +21,11 @@ app.get('/',(req,res)=>{
     res.render('index')
 })
 
-app.get('/result', (req,res)=>{
-    res.status(200)
-    res.type('text/html')
-    res.render('result')
-})
+// app.get('/result', (req,res)=>{
+//     res.status(200)
+//     res.type('text/html')
+//     res.render('result')
+// })
 
 /************** Breakdown the url **************/
 //!https://newsapi.org/v2/top-headlines
@@ -36,23 +36,44 @@ app.get('/result', (req,res)=>{
 
 app.post('/index',
     express.urlencoded({extended: true}), 
-    (req,res,next)=>{
-        console.log(req.body)
+    async(req,res,next)=>{
+        // console.log(req.body)
         const url = withQuery(
             URL,
             {
                 q: req.body.search,
                 country: req.body.country,
                 category: req.body.category,
-                apiKey: API_KEY,
+                apiKey: API_KEY
             }
         )
         console.log(url)
+        let result = await fetch(url)
+        
+        let jsResult = await result.json();
+        // console.log(result)
+        // const article = jsResult.articles[0]
+        // console.log(article);
+
+        const article = jsResult.articles
+        .map((e)=>{
+            return {title: e.title, image: e.urlToImage, summary: e.description, date: e.publishedAt, url: e.url}
+        })
+        console.log(article)
+        res.status(200)
+        res.type('text/html')
+        res.render('result',{
+            article,
+            hasContent: article.length>0
+        })
 })
 
 //access to statics file
 app.use(express.static(__dirname + '/static'))
 
+app.use((req,res)=>{
+    res.redirect('/')
+})
 
 //start the server
 app.listen(PORT,()=>{
