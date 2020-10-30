@@ -32,7 +32,7 @@ app.get('/',(req,res)=>{
 //?country=de
 //&q=trump
 //&category=business
-//&apiKey=b09895f28f3f4851906803ecf2cddd79
+//&apiKey=
 
 app.post('/index',
     express.urlencoded({extended: true}), 
